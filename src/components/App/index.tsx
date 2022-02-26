@@ -1,7 +1,7 @@
 import React from 'react';
 import QuestionsInput from '../QuestionsInput';
 
-import pentagram from "../../images/pentagram.svg";
+const pentagram = require("../../images/pentagram.svg");
 
 import "./index.scss";
 
