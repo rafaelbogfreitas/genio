@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import GeneBrain from '../../services/GeneBrain';
+import { useQuestionsContext } from '../../contexts/QuestionsContext';
 
 import "./styles.scss";
 
@@ -7,21 +7,23 @@ const QuestionsInput = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [response, setResponse] = useState<string>("");
 
+  const { resetGeneBrain, handleQuestionInput, getSecretAnswer } = useQuestionsContext();
+
   function revealSecret() {
-    setResponse(GeneBrain.answer);
+    setResponse(getSecretAnswer());
   };
   
   function keyPressedHandler(e: any) {
     if(e.key === "Enter") {
       revealSecret();
-      GeneBrain.reset();
+      resetGeneBrain();
       setInputValue("");
     }
   };
 
   function handleChange(e: React.FormEvent<HTMLTextAreaElement>) {
     const parsedValue = e.currentTarget.value.replace("\n", "");
-    const value = GeneBrain.manageQuestionInput(parsedValue);
+    const value = handleQuestionInput(parsedValue);
     setInputValue(value);
   };
   

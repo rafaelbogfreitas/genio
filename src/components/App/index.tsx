@@ -1,18 +1,22 @@
 import React from 'react';
+
+import QuestionsContextProvider from '../../contexts/QuestionsContext';
 import QuestionsInput from '../QuestionsInput';
 
-const pentagram = require("../../images/pentagram.svg");
+import pentagram from "../../images/pentagram.svg";
 
 import "./index.scss";
 
 const App = () => {
   return (
-    <div className="mainContainer">
-      <img className="pentagram" src={pentagram} alt="pentagram" />
-      <h1 className="title">Gênio</h1>
-      <h2 className="subtitle">Pergunte-me algo</h2>
-      <QuestionsInput />
-    </div>
+    <QuestionsContextProvider>
+      <div className="mainContainer">
+        <img className="pentagram" src={pentagram} alt="pentagram" />
+        <h1 className="title">Gênio</h1>
+        <h2 className="subtitle">Pergunte-me algo</h2>
+        <QuestionsInput />
+      </div>
+    </QuestionsContextProvider>
   )
 };
 
