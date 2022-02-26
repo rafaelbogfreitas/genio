@@ -1,6 +1,5 @@
-import React, { FormEvent, useState } from 'react'
+import React, { useState } from 'react'
 import GeneBrain from '../../services/GeneBrain';
-import { geneeIntros } from '../../strings';
 
 import "./styles.scss";
 
