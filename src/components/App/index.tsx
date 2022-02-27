@@ -1,9 +1,8 @@
 import React from 'react';
+import QuestionsContextProvider, { useQuestionsContext } from '../../contexts/QuestionsContext';
 
-import QuestionsContextProvider from '../../contexts/QuestionsContext';
 import QuestionsInput from '../QuestionsInput';
-
-import pentagram from "../../images/pentagram.svg";
+import Pentagram from '../Pentagram';
 
 import "./index.scss";
 
@@ -11,7 +10,7 @@ const App = () => {
   return (
     <QuestionsContextProvider>
       <div className="mainContainer">
-        <img className="pentagram" src={pentagram} alt="pentagram" />
+        <Pentagram />
         <h1 className="title">Gênio</h1>
         <h2 className="subtitle">Pergunte-me algo</h2>
         <QuestionsInput />

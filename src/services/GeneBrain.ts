@@ -1,8 +1,8 @@
 class GeneBrain {
-  private secretAnswer: string = "";
-  private displayedValue: string = "";
-  private isTypingSecret: boolean = true;
-  private geneSentence: string | undefined = undefined;
+  private _secretAnswer: string = "";
+  private _displayedValue: string = "";
+  private _isTypingSecret: boolean = true;
+  private _geneSentence: string | undefined = undefined;
 
   private geneIntros = [
     "Grandioso gênio dessa terra",
@@ -10,20 +10,20 @@ class GeneBrain {
   ];
 
   constructor() {
-    this.geneSentence = this.geneIntro;
+    this._geneSentence = this.geneIntro;
   }
 
-  get answer(): string {
-    return this.secretAnswer;
+  get secretAnswer(): string {
+    return this._secretAnswer;
   }
-
+  
   private get geneIntro(): string {
     const randomIndex = Math.floor(Math.random() * this.geneIntros.length);
     return this.geneIntros[randomIndex];
   }
 
   private get hasDeletedChar(): boolean {
-    return this.secretAnswer.length < this.displayedValue.length;
+    return this.secretAnswer.length < this._displayedValue.length;
   }
 
   private hasStartedTypingQuestion(text: string): boolean {
@@ -31,7 +31,7 @@ class GeneBrain {
   }
 
   private getCharInRightGeneSentencePosition(): string {
-    return this.geneSentence?.[this.displayedValue.length] ?? "";
+    return this._geneSentence?.[this._displayedValue.length] ?? "";
   }
 
   private getTextLastChar(text: string): string {
@@ -39,26 +39,26 @@ class GeneBrain {
   }
 
   reset() {
-    this.secretAnswer = "";
-    this.displayedValue = "";
-    this.isTypingSecret = true;
-    this.geneSentence = this.geneIntro;
+    this._secretAnswer = "";
+    this._displayedValue = "";
+    this._isTypingSecret = true;
+    this._geneSentence = this.geneIntro;
   }
 
   manageQuestionInput(text: string) {
-    if(this.isTypingSecret && this.hasStartedTypingQuestion(text)) {
-      this.isTypingSecret = false;
-      return this.displayedValue;
+    if(this._isTypingSecret && this.hasStartedTypingQuestion(text)) {
+      this._isTypingSecret = false;
+      return this._displayedValue;
     }
     
-    if(this.isTypingSecret && text) {
-      this.secretAnswer = this.secretAnswer + this.getTextLastChar(text);
-      this.displayedValue = this.displayedValue + this.getCharInRightGeneSentencePosition();
-      return this.displayedValue;
+    if(this._isTypingSecret && text) {
+      this._secretAnswer = this.secretAnswer + this.getTextLastChar(text);
+      this._displayedValue = this._displayedValue + this.getCharInRightGeneSentencePosition();
+      return this._displayedValue;
     }
 
-    this.displayedValue = text;
-    return this.displayedValue;
+    this._displayedValue = text;
+    return this._displayedValue;
   }
 };
 
