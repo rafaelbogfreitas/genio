@@ -49,14 +49,14 @@ const QuestionsContextProvider: React.FC = ({ children }) => {
   }
 
   function getSecretAnswer(): string {
-    return GeneBrain.answer;
+    return GeneBrain.secretAnswer;
   }
   
   function resetGeneBrain() {
     setCurrentQuestion("");
     GeneBrain.reset();
   }
-  
+ 
   return (
     <QuestionsContext.Provider value={{
       handleQuestionInput,
