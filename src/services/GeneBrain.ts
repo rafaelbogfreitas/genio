@@ -22,8 +22,8 @@ class GeneBrain {
     return this.geneIntros[randomIndex];
   }
 
-  private get hasDeletedChar(): boolean {
-    return this.secretAnswer.length < this._displayedValue.length;
+  private hasDeletedChar(inputText: string): boolean {
+    return inputText.length < this._displayedValue.length;
   }
 
   private hasStartedTypingQuestion(text: string): boolean {
@@ -36,6 +36,26 @@ class GeneBrain {
 
   private getTextLastChar(text: string): string {
     return text.split("").pop() ?? "";
+  }
+
+  private removeTextLastChar(text: string): string {
+    if(!text) {
+      return "";
+    }
+
+    const textArray = text.split("");
+    textArray.pop();
+
+    return textArray.join("");
+  }
+  
+  private handleDelete(inputText: string): { deleted: boolean } {
+    if(this._isTypingSecret && this.hasDeletedChar(inputText)) {
+      this._displayedValue = this.removeTextLastChar(this._displayedValue);
+      this._secretAnswer = this.removeTextLastChar(this._secretAnswer);
+      return { deleted: true };
+    }
+    return { deleted: false };
   }
 
   reset() {
@@ -52,8 +72,14 @@ class GeneBrain {
     }
     
     if(this._isTypingSecret && text) {
-      this._secretAnswer = this.secretAnswer + this.getTextLastChar(text);
+      const { deleted } = this.handleDelete(text);
+
+      if(deleted) {
+        return this._displayedValue;
+      }
+
       this._displayedValue = this._displayedValue + this.getCharInRightGeneSentencePosition();
+      this._secretAnswer = this.secretAnswer + this.getTextLastChar(text);
       return this._displayedValue;
     }
 
