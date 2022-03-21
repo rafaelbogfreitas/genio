@@ -39,10 +39,6 @@ class GeneBrain {
   }
 
   private removeTextLastChar(text: string): string {
-    if(!text) {
-      return "";
-    }
-
     const textArray = text.split("");
     textArray.pop();
 
