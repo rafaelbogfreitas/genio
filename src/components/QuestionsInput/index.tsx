@@ -30,6 +30,7 @@ const QuestionsInput = () => {
   return (
     <div className="container">
       <textarea
+        autoFocus
         className="questionInput"
         value={inputValue}
         onChange={handleChange}
