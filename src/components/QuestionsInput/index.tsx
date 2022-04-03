@@ -43,4 +43,4 @@ const QuestionsInput = () => {
   );
 }
 
-export default QuestionsInput;
+export default React.memo(QuestionsInput);
