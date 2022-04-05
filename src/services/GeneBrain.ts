@@ -16,7 +16,7 @@ class GeneBrain {
   get secretAnswer(): string {
     return this._secretAnswer;
   }
-  
+
   private get geneIntro(): string {
     const randomIndex = Math.floor(Math.random() * this.geneIntros.length);
     return this.geneIntros[randomIndex];
@@ -44,9 +44,9 @@ class GeneBrain {
 
     return textArray.join("");
   }
-  
+
   private handleDelete(inputText: string): { deleted: boolean } {
-    if(this._isTypingSecret && this.hasDeletedChar(inputText)) {
+    if (this._isTypingSecret && this.hasDeletedChar(inputText)) {
       this._displayedValue = this.removeTextLastChar(this._displayedValue);
       this._secretAnswer = this.removeTextLastChar(this._secretAnswer);
       return { deleted: true };
@@ -62,19 +62,20 @@ class GeneBrain {
   }
 
   manageQuestionInput(text: string) {
-    if(this._isTypingSecret && this.hasStartedTypingQuestion(text)) {
+    if (this._isTypingSecret && this.hasStartedTypingQuestion(text)) {
       this._isTypingSecret = false;
       return this._displayedValue;
     }
-    
-    if(this._isTypingSecret && text) {
+
+    if (this._isTypingSecret && text) {
       const { deleted } = this.handleDelete(text);
 
-      if(deleted) {
+      if (deleted) {
         return this._displayedValue;
       }
 
-      this._displayedValue = this._displayedValue + this.getCharInRightGeneSentencePosition();
+      this._displayedValue =
+        this._displayedValue + this.getCharInRightGeneSentencePosition();
       this._secretAnswer = this.secretAnswer + this.getTextLastChar(text);
       return this._displayedValue;
     }
@@ -82,6 +83,6 @@ class GeneBrain {
     this._displayedValue = text;
     return this._displayedValue;
   }
-};
+}
 
 export default new GeneBrain();
