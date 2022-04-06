@@ -9,7 +9,7 @@ describe("Questionaire Service", () => {
 
   const questionWithAnswer = {
     question: "What's your name",
-    answer: "Mocker"
+    answer: "Mocker",
   };
 
   beforeAll(() => {
@@ -18,7 +18,7 @@ describe("Questionaire Service", () => {
       value: {
         setItem: jest.fn(),
         removeItem: jest.fn(),
-      }
+      },
     });
   });
 
@@ -33,7 +33,8 @@ describe("Questionaire Service", () => {
   });
 
   it("should return the answers array", () => {
-    const returnedAnswers = questionaireService.updateAnswers(questionWithAnswer);
+    const returnedAnswers =
+      questionaireService.updateAnswers(questionWithAnswer);
 
     expect(returnedAnswers).toStrictEqual([questionWithAnswer]);
   });
@@ -54,10 +55,12 @@ describe("Questionaire Service", () => {
       JSON.stringify(questionaireService.answers)
     );
   });
-  
+
   it("should reset the localStorage entry", () => {
     questionaireService.clearAnswers();
 
-    expect(window.localStorage.removeItem).toHaveBeenCalledWith(questionaireService.STORAGE_KEY);
+    expect(window.localStorage.removeItem).toHaveBeenCalledWith(
+      questionaireService.STORAGE_KEY
+    );
   });
 });

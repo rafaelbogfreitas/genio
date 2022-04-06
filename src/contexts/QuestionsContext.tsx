@@ -1,14 +1,16 @@
-import React, { createContext, useContext, useState } from 'react';
-import GeneBrain from '../services/GeneBrain';
+import React, { createContext, useContext, useState } from "react";
+import GeneBrain from "../services/GeneBrain";
 
-const QuestionsContext = createContext<QuestionProviderValues>({} as QuestionProviderValues);
+const QuestionsContext = createContext<QuestionProviderValues>(
+  {} as QuestionProviderValues
+);
 
 export const useQuestionsContext = () => useContext(QuestionsContext);
 
 interface QuestionObject {
   question: string;
   answer: string;
-};
+}
 
 interface QuestionProviderValues {
   handleQuestionInput: (questionText: string) => string;
@@ -18,7 +20,7 @@ interface QuestionProviderValues {
   getCurrentQuestion: () => string;
   getSecretAnswer: () => string;
   resetGeneBrain: () => void;
-};
+}
 
 type QuestionsHistory = QuestionObject[];
 
@@ -33,15 +35,15 @@ const QuestionsContextProvider: React.FC = ({ children }) => {
   function clearQuestions() {
     setQuestions([]);
   }
-  
+
   function getQuestions(): QuestionsHistory {
     return questions;
   }
-  
+
   function getCurrentQuestion(): string {
     return currentQuestion;
   }
-   
+
   function handleQuestionInput(questionText: string): string {
     const currentQuestionValue = GeneBrain.manageQuestionInput(questionText);
     setCurrentQuestion(currentQuestionValue);
@@ -51,22 +53,24 @@ const QuestionsContextProvider: React.FC = ({ children }) => {
   function getSecretAnswer(): string {
     return GeneBrain.secretAnswer;
   }
-  
+
   function resetGeneBrain() {
     setCurrentQuestion("");
     GeneBrain.reset();
   }
- 
+
   return (
-    <QuestionsContext.Provider value={{
-      handleQuestionInput,
-      updateQuestions,
-      clearQuestions,
-      getQuestions,
-      getCurrentQuestion,
-      getSecretAnswer,
-      resetGeneBrain,
-    }}>
+    <QuestionsContext.Provider
+      value={{
+        handleQuestionInput,
+        updateQuestions,
+        clearQuestions,
+        getQuestions,
+        getCurrentQuestion,
+        getSecretAnswer,
+        resetGeneBrain,
+      }}
+    >
       {children}
     </QuestionsContext.Provider>
   );
